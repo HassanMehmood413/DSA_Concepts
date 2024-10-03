@@ -670,38 +670,298 @@
 // console.log(distance)
 
 
-numCourses = 4, prerequisites = [[1, 0], [2, 0], [3, 1], [3, 2]]
+// numCourses = 4, prerequisites = [[1, 0], [2, 0], [3, 1], [3, 2]]
 
+// let graph = []
+// let indegree = new Array(numCourses).fill(0)
+// let visit = new Array(numCourses).fill(false)
+// let arr = []
+// var again = function (graph, node1, node2) {
+
+//     if (!graph[node1]) {
+//         graph[node1] = []
+//     }
+//     graph[node1].push(node2)
+//     indegree[node2]++
+// }
+
+// for (let i = 0; i < numCourses; i++) {
+//     if (indegree[i] == 0) {
+//         queue.push(i)
+//     }
+// }
+
+// while (queue.length > 0) {
+//     let first = queue.shift()
+//     arr.push(first)
+//     for (let neighbor of graph[first]) {
+//         indegree[neighbor]--
+//         if (indegree[neighbor] == 0) {
+//             queue.push(neighbor)
+//         }
+//     }
+// }
+// console.log(arr)
+
+
+
+// let visit = new Array(V).fill(-1)
+// let parent = new Array(V).fill(-1)
+// let low = new Array(V).fill(-1)
+// let dict = new Array(V).fill(-1)
+// let time = [0]
+// let bridges = []
+
+// var dfs = function (start, parent) {
+//     visit[start] = true
+//     dict[start] = low[start] = time[0]++
+//     for (let neighbor of adj[start]) {
+//         if (!visit[neighbor]) {
+//             parent[neighbor] = start
+//             dfs(neighbor, visit, parent, low, dict, time, bridges)
+//             low[start] = Math.min(low[start], low[neighbor])
+
+//             if (low[neighbor] > dict[start]) {
+//                 bridges.push([start, neighbor])
+//             }
+//         }
+//         else if (neighbor != parent[start]) {
+//             low[start] = Math.min(low[start], dict[neighbor])
+//         }
+//     }
+
+// }
+
+// for (let i = 0; i < V; i++) {
+//     if (!visit[i]) {
+//         dfs(i, parent)
+//     }
+// }
+// bridges.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+// console.log(bridges)
+
+
+
+
+// V, adj, X
+
+// var bfs = function (adj, start, visit) {
+//     let queue = []
+//     let number = 0
+//     visit[start] = true
+//     queue.push([start, 0])
+//     while (queue.length > 0) {
+//         let [first, step] = queue.shift()
+//         for (let neighbor of adj[first]) {
+//             if (!visit[neighbor]) {
+//                 number++
+//                 visit[neighbor] = true
+//                 queue.push([neighbor, step + 1])
+//                 if (neighbor == x) {
+//                     return step + 1
+//                 }
+//             }
+//         }
+//     }
+// }
+
+
+
+
+// let visit = new Array(V).fill(false)
+// let queue = []
+// for (let i = 0; i < V; i++) {
+//     if (!visit[i]) {
+//         bfs(adj, i, visit)
+//     }
+// }
+
+
+// let grid = [
+//     ["X", "X", "X", "X"],
+//     ["X", "O", "O", "X"],
+//     ["X", "X", "O", "X"],
+//     ["X", "O", "X", "X"]
+// ]
+// let rows = grid.length
+// let cols = grid[0].length
+// var dfs = function (start, end) {
+//     if (start < 0 || start >= rows || end < 0 || end >= cols || grid[start][end] != "O") {
+//         return
+//     }
+//     grid[start][end] = "B"
+
+//     for (let [r, c] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
+//         let x = r + start
+//         let y = c + end
+//         dfs(x, y)
+//     }
+
+// }
+// for (let i = 0; i < rows; i++) {
+//     if (grid[i][0] == "O") {
+//         dfs(i, 0)
+//     }
+//     if (grid[i][cols - 1] == "O") {
+//         dfs(i, cols - 1)
+//     }
+// }
+
+// for (let i = 0; i < cols; i++) {
+//     if (grid[0][i] == "O") {
+//         dfs(0, i)
+//     }
+//     if (grid[rows - 1][i] == "O") {
+//         dfs(rows - 1, i)
+//     }
+// }
+
+
+
+// for (let i = 0; i < gird.length; i++) {
+//     for (let j = 0; j < gird[0].length; j++) {
+//         if (grid[i][j] == "O") {
+//             grid[i][j] = "X"
+//         }
+//         else if (grid[i][j] == "B") {
+//             grid[i][j] = "0"
+//         }
+//     }
+// }
+
+// [
+//     ["X", "O", "X"],
+//     ["O", "X", "O"],
+//     ["X", "O", "X"]
+// ]
+
+
+
+// let graph = []
+
+// let vertices = 0;
+// for (let [u, v] of edges) {
+//     vertices = Math.max(vertices, u, v);
+// }
+// vertices += 1;
+// var again = function (graph, node1, node2) {
+//     if (!graph[node1]) {
+//         graph.set(node1, [])
+//     }
+//     if (!graph[node2]) {
+//         graph.set(node2, [])
+//     }
+//     graph[node1].push(node2)
+//     graph[node2].push(node1)
+// }
+
+// for (let i = 0; i < edges.length; i++) {
+//     again(graph, edges[i][0], edges[i][1])
+// }
+
+// let visit = new Array(vertices).fill(false)
+// let parent = new Array(vertices).fill(-1)
+// let dict = new Array(vertices).fill(-1)
+// let low = new Array(vertices).fill(-1)
+// let time = [0]
+// let bridges = []
+
+
+// var dfs = function (graph, start, visit, parent, dict, low, bridges, time) {
+//     visit[start] = true
+//     dict[start] = low[start] = time[0]++
+//     for (let neighbor of graph[start]) {
+//         if (!visit[neighbor]) {
+//             parent[neighbor] = start
+//             dfs(graph, neighbor, visit, parent, dict, low, bridges, time)
+
+//             low[start] = Math.min(low[start], low[neighbor])
+
+//             if (low[neighbor] > dict[start]) {
+//                 bridges.push(start, neighbor)
+//             }
+//         }
+//         else if (neighbor != parent[start]) {
+//             low[start] = Math.min(low[start], dict[neighbor])
+//         }
+//     }
+// }
+
+// for (let i = 0; i < vertices; i++) {
+//     if (!visit[i]) {
+//         dfs(graph, i, visit, parent, dict, low, bridges, time)
+//     }
+// }
+
+// let grid = [
+//     [2147483647, -1, 0, 2147483647],
+//     [2147483647, 2147483647, 2147483647, -1],
+//     [2147483647, -1, 2147483647, -1],
+//     [0, -1, 2147483647, 2147483647]
+// ]
+// let rows = grid.length
+// let cols = grid[0].length
+// let number = 0
+
+
+// for (let i = 0; i < grid.length; i++) {
+//     for (let j = 0; j < grid[0].length; j++) {
+//         if (grid[i][j] == 2147483647) {
+//             queue.push([i, j])
+//         }
+//     }
+// }
+
+// while (queue.length > 0) {
+//     let [start, end] = queue.shift()
+//     for (const [r, c] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
+//         let x = start + r
+//         let y = end + c
+//         if (x > 0 && y > 0 && x <= rows && y <= cols && grid[x][y] == 2147483647) {
+//             grid[x][y] = grid[start][end] + 1
+//             queue.push([x, y])
+//         }
+//     }
+// }
+
+
+
+times, n, k
+
+let visit = new Array(n).fill(false)
+let dict = new Array(n).fill(Infinity)
+dict[n] = 0
 let graph = []
-let indegree = new Array(numCourses).fill(0)
-let visit = new Array(numCourses).fill(false)
-let arr = []
-var again = function (graph, node1, node2) {
-
-    if (!graph[node1]) {
-        graph[node1] = []
-    }
-    graph[node1].push(node2)
-    indegree[node2]++
+for (let i = 0; i < V; i++) {
+    graph[i] = []
+}
+for (let [u, v, w] of edges) {
+    graph[u].push([v, w])  // Directed edge from u to v with weight w
 }
 
-for (let i = 0; i < numCourses; i++) {
-    if (indegree[i] == 0) {
-        queue.push(i)
+
+var minkey = function (visit, dict, n) {
+    let min = Infinity, index = -1
+
+    for (let i = 0; i < n; i++) {
+        if (!visit[i] && dict[visit] < min) {
+            min = dict[visit]
+            index = i
+        }
     }
+    return index
 }
 
-while (queue.length > 0) {
-    let first = queue.shift()
-    arr.push(first)
-    for (let neighbor of graph[first]) {
-        indegree[neighbor]--
-        if (indegree[neighbor] == 0) {
-            queue.push(neighbor)
+for (let i = 0; i < n - 1; i++) {
+    let minkey = key(visit, dict, n)
+
+    visit[minkey] = true
+
+    for (let [neighbor, weight] of graph[minkey]) {
+        if (!visit[neighbor] && dict[minkey] + weight < dict[neighbor]) {
+            dict[neighbor] = dict[minkey] + weight
         }
     }
 }
-console.log(arr)
-
-
-
+let p = dict.reduce((acc, dcc) => acc + dcc, 0)
+console.log(p)

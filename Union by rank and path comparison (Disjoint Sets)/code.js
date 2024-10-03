@@ -1,3 +1,7 @@
+
+// A redundant connection refers to an extra edge in a graph that, if removed, will not disconnect the graph. It forms a cycle, meaning that there is already a way to connect all nodes in the graph, so adding the extra edge is unnecessary and causes redundancy.
+// problem for this : https://leetcode.com/problems/redundant-connection/
+
 let parent = []
 let rank = []
 for (let i = 0; i < n; i++) {
