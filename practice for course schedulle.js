@@ -926,42 +926,121 @@
 
 
 
-times, n, k
+// times, n, k
 
-let visit = new Array(n).fill(false)
-let dict = new Array(n).fill(Infinity)
-dict[n] = 0
+// let visit = new Array(n).fill(false)
+// let dict = new Array(n).fill(Infinity)
+// dict[n] = 0
+// let graph = []
+// for (let i = 0; i < V; i++) {
+//     graph[i] = []
+// }
+// for (let [u, v, w] of edges) {
+//     graph[u].push([v, w])  // Directed edge from u to v with weight w
+// }
+
+
+// var minkey = function (visit, dict, n) {
+//     let min = Infinity, index = -1
+
+//     for (let i = 0; i < n; i++) {
+//         if (!visit[i] && dict[visit] < min) {
+//             min = dict[visit]
+//             index = i
+//         }
+//     }
+//     return index
+// }
+
+// for (let i = 0; i < n - 1; i++) {
+//     let minkey = key(visit, dict, n)
+
+//     visit[minkey] = true
+
+//     for (let [neighbor, weight] of graph[minkey]) {
+//         if (!visit[neighbor] && dict[minkey] + weight < dict[neighbor]) {
+//             dict[neighbor] = dict[minkey] + weight
+//         }
+//     }
+// }
+// let p = dict.reduce((acc, dcc) => acc + dcc, 0)
+// console.log(p)
+
+
+// heights = [
+//     [1, 2, 2, 3, 5],
+//     [3, 2, 3, 4, 4],
+//     [2, 4, 5, 3, 1],
+//     [6, 7, 1, 4, 5],
+//     [5, 1, 1, 2, 4]
+// ]
+// let rows = heights.length
+// let cols = heights[0].length
+// let pacific = new Set()
+// let atlantic = new Set()
+
+// var dfs = function (start, end, visit) {
+//     let key = `${start},${end}`
+//     visit.add(key)
+//     for (let [r, c] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
+//         let x = r + start
+//         let y = c + end
+//         if (x >= 0 && x < rows && y >= 0 && y < cols && heights[x][y] >= heights[start][end] && !visit.has(`${x},${y}`)) {
+//             dfs(x, y, visit)
+//         }
+//     }
+// }
+// for (let i = 0; i < rows; i++) {
+//     dfs(i, 0, pacific)
+//     dfs(i, cols - 1, atlantic)
+// }
+
+// for (let i = 0; i < cols; i++) {
+//     dfs(0, i, pacific)
+//     dfs(rows - 1, i, atlantic)
+// }
+// let result = []
+// for (let i = 0; i < rows; i++) {
+//     for (let j = 0; j < cols; j++) {
+//         let key = `${i},${j}`
+//         if (pacific.has(key) && atlantic.has(key)) {
+//             result.push([i, j])
+//         }
+//     }
+// }
+
+grid = [[0, 2], [1, 3]]
 let graph = []
-for (let i = 0; i < V; i++) {
+for (let i = 0; i < grid.length; i++) {
     graph[i] = []
 }
-for (let [u, v, w] of edges) {
-    graph[u].push([v, w])  // Directed edge from u to v with weight w
+for (let [u, v] of grid) {
+    graph[u].push(v)
 }
+let visit = new Array(grid.length).fill(false)
+let dict = new Array(grid.length).fill(Infinity)
+dict[0] = 0
 
-
-var minkey = function (visit, dict, n) {
-    let min = Infinity, index = -1
-
-    for (let i = 0; i < n; i++) {
-        if (!visit[i] && dict[visit] < min) {
-            min = dict[visit]
+var minkey = function (dict, visit, start) {
+    let mins = Infinity, index = -1
+    for (let i = 0; i < grid.length; i++) {
+        if (!visit[i] && dict[i] < mins) {
+            mins = dict[i]
             index = i
         }
     }
     return index
 }
 
-for (let i = 0; i < n - 1; i++) {
-    let minkey = key(visit, dict, n)
+for (let i = 0; i < grid.length - 1; i++) {
+    let min = minkey(dict, visit, grid.length)
 
-    visit[minkey] = true
+    visit[min] = true
 
-    for (let [neighbor, weight] of graph[minkey]) {
-        if (!visit[neighbor] && dict[minkey] + weight < dict[neighbor]) {
-            dict[neighbor] = dict[minkey] + weight
+    for (let [neighbor, weight] of graph[min]) {
+        if (!visit[neighbor] && dict[min] + weight < dict[neighbor]) {
+            dict[neighbor] = dict[min] + weight
         }
     }
 }
-let p = dict.reduce((acc, dcc) => acc + dcc, 0)
-console.log(p)
+console.log(min)
